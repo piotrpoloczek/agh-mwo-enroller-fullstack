@@ -15,7 +15,7 @@ export default function MeetingsPage({username}) {
             }
         };
         fetchMeetings();
-    }, );
+    }, []);
 
 
     async function handleNewMeeting(meeting) {
