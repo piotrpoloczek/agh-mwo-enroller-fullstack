@@ -15,7 +15,8 @@ export default function MeetingsPage({username}) {
             }
         };
         fetchMeetings();
-    }, []);
+    }, );
+
 
     async function handleNewMeeting(meeting) {
         const response = await fetch('/api/meetings', {
@@ -30,9 +31,14 @@ export default function MeetingsPage({username}) {
         }
     }
 
-    function handleDeleteMeeting(meeting) {
-        const nextMeetings = meetings.filter(m => m !== meeting);
-        setMeetings(nextMeetings);
+    async function handleDeleteMeeting(meeting) {
+        const response = await fetch(`/api/meetings/${meeting.id}`, {
+            method: 'DELETE',
+        });
+        if (response.ok) {
+            const nextMeetings = meetings.filter(m => m !== meeting);
+            setMeetings(nextMeetings);
+        }
     }
 
     return (
