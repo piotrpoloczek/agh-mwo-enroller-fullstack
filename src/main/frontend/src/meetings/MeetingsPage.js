@@ -24,12 +24,19 @@ export default function MeetingsPage({username}) {
             body: JSON.stringify(meeting),
             headers: { 'Content-Type': 'application/json' }
         });
+
         if (response.ok) {
-            const nextMeetings = [...meetings, meeting];
+            const data = await response.json(); // get response body as JSON
+            console.log(data); // log the response body
+            const nextMeetings = [...meetings, data]; // use returned data instead of original input
             setMeetings(nextMeetings);
             setAddingNewMeeting(false);
+        } else {
+            const error = await response.text(); // get error message if available
+            console.error('Failed to add meeting:', error);
         }
     }
+
 
     async function handleDeleteMeeting(meeting) {
         const response = await fetch(`/api/meetings/${meeting.id}`, {
