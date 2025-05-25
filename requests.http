@@ -1,0 +1,106 @@
+### Get all participants
+GET http://localhost:8080/participants
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL215ZW5yb2xsZXJkZW1vIiwic3ViIjoiamFuZWsiLCJpYXQiOjE3NDgxOTYwOTUsImV4cCI6MTc0ODE5OTY5NSwicm9sZSI6InBhcnRpY2lwYW50In0.Fq6H_OifZamaMY9crDt-_8xtvZ9iKNRQWLW1bpHIwSg
+
+
+### Get all participants sorted by login descending
+GET http://localhost:8080/participants?sortBy=login&sortOrder=DESC
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL215ZW5yb2xsZXJkZW1vIiwic3ViIjoiamFuZWsiLCJpYXQiOjE3NDgxOTYwOTUsImV4cCI6MTc0ODE5OTY5NSwicm9sZSI6InBhcnRpY2lwYW50In0.Fq6H_OifZamaMY9crDt-_8xtvZ9iKNRQWLW1bpHIwSg
+
+
+### Try wrong sortOrder (expect error)
+GET http://localhost:8080/participants?sortBy=login&sortOrder=DESCSSS
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL215ZW5yb2xsZXJkZW1vIiwic3ViIjoiamFuZWsiLCJpYXQiOjE3NDgxOTYwOTUsImV4cCI6MTc0ODE5OTY5NSwicm9sZSI6InBhcnRpY2lwYW50In0.Fq6H_OifZamaMY9crDt-_8xtvZ9iKNRQWLW1bpHIwSg
+
+
+### Get participants filtered by key
+GET http://localhost:8080/participants?key=piotr
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL215ZW5yb2xsZXJkZW1vIiwic3ViIjoiamFuZWsiLCJpYXQiOjE3NDgxOTYwOTUsImV4cCI6MTc0ODE5OTY5NSwicm9sZSI6InBhcnRpY2lwYW50In0.Fq6H_OifZamaMY9crDt-_8xtvZ9iKNRQWLW1bpHIwSg
+
+
+### Get participants filtered only by login key
+GET http://localhost:8080/participants?key=login
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL215ZW5yb2xsZXJkZW1vIiwic3ViIjoiamFuZWsiLCJpYXQiOjE3NDgxOTYwOTUsImV4cCI6MTc0ODE5OTY5NSwicm9sZSI6InBhcnRpY2lwYW50In0.Fq6H_OifZamaMY9crDt-_8xtvZ9iKNRQWLW1bpHIwSg
+
+
+### Get all meetings
+GET http://localhost:8080/meetings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL215ZW5yb2xsZXJkZW1vIiwic3ViIjoiamFuZWsiLCJpYXQiOjE3NDgxOTYwOTUsImV4cCI6MTc0ODE5OTY5NSwicm9sZSI6InBhcnRpY2lwYW50In0.Fq6H_OifZamaMY9crDt-_8xtvZ9iKNRQWLW1bpHIwSg
+
+
+### Get meeting by id (example id 1)
+GET http://localhost:8080/meetings/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL215ZW5yb2xsZXJkZW1vIiwic3ViIjoiamFuZWsiLCJpYXQiOjE3NDgxOTYwOTUsImV4cCI6MTc0ODE5OTY5NSwicm9sZSI6InBhcnRpY2lwYW50In0.Fq6H_OifZamaMY9crDt-_8xtvZ9iKNRQWLW1bpHIwSg
+
+
+### Create a new meeting
+POST http://localhost:8080/meetings
+Content-Type: application/json
+
+{
+  "title": "New Meeting Title",
+  "description": "Description of the new meeting",
+  "date": "2025-04-30"
+}
+
+### Update meeting by id (example id 1)
+PUT http://localhost:8080/meetings/2
+Content-Type: application/json
+
+{
+  "title": "Updated Title",
+  "description": "Updated Description",
+  "date": "2025-05-01"
+}
+
+### Delete meeting by id (example id 1)
+DELETE http://localhost:8080/meetings/1
+
+###
+GET http://localhost:8080/meetings/2/participants
+
+###
+POST http://localhost:8080/meetings/2/participants
+Content-Type: application/json
+
+{
+  "login": "user_piotr"
+}
+###
+DELETE http://localhost:8080/meetings/2/participants/user_piotr
+###
+
+### Create a new participant
+POST http://localhost:8080/participants
+Content-Type: application/json
+
+{
+  "login": "nowy_usejjjr",
+  "password": "tajne_haslo"
+}
+
+###
+
+POST http://localhost:8080/participants
+Content-Type: application/json
+
+{
+  "login": "janek",
+  "password": "tajemne"
+}
+
+
+###
+POST http://localhost:8080/tokens
+Content-Type: application/json
+
+{
+  "login": "janek",
+  "password": "tajemne"
+}
+
+###
+
+GET http://localhost:8080/meetings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL215ZW5yb2xsZXJkZW1vIiwic3ViIjoiamFuZWsiLCJpYXQiOjE3NDgxOTYwOTUsImV4cCI6MTc0ODE5OTY5NSwicm9sZSI6InBhcnRpY2lwYW50In0.Fq6H_OifZamaMY9crDt-_8xtvZ9iKNRQWLW1bpHIwSg
+###
