@@ -31,7 +31,7 @@ public class MeetingParticipantService {
         return meeting.getParticipants();
     }
 
-    public void addParticipant(long meetingId, String participantLogin) {
+    public synchronized void addParticipant(long meetingId, String participantLogin) {
         Meeting meeting = meetingService.findById(meetingId);
         if (meeting == null) {
             throw new IllegalArgumentException("Meeting not found");
@@ -46,7 +46,7 @@ public class MeetingParticipantService {
         meetingService.update(meeting);
     }
 
-    public void removeParticipant(long meetingId, String participantLogin) {
+    public synchronized void removeParticipant(long meetingId, String participantLogin) {
         Meeting meeting = meetingService.findById(meetingId);
         if (meeting == null) {
             throw new IllegalArgumentException("Meeting not found");

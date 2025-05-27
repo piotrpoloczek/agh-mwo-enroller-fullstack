@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.transaction.Transactional;
+
 @RestController
 @RequestMapping("/meetings")
 public class MeetingRestController {
@@ -20,12 +22,14 @@ public class MeetingRestController {
     MeetingService meetingService;
 
 
+    @Transactional
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<?> getMeetings() {
         return new ResponseEntity<>(meetingService.getAll(), HttpStatus.OK);
     }
 
 
+    @Transactional
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getMeeting(@PathVariable("id") long id) {
         Meeting meeting = meetingService.findById(id);
@@ -35,12 +39,14 @@ public class MeetingRestController {
         return new ResponseEntity<>(meeting, HttpStatus.OK);
     }
 
+    @Transactional
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ResponseEntity<?> addMeeting(@RequestBody Meeting meeting) {
         meetingService.add(meeting);
         return new ResponseEntity<>(meeting, HttpStatus.CREATED);
     }
 
+    @Transactional
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteMeeting(@PathVariable("id") long id) {
         Meeting meeting = meetingService.findById(id);
@@ -54,6 +60,7 @@ public class MeetingRestController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @Transactional
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateMeeting(@PathVariable("id") long id, @RequestBody Meeting updatedMeeting) {
         Meeting meeting = meetingService.findById(id);

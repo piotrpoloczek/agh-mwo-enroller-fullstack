@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import com.company.enroller.model.Participant;
 import com.company.enroller.persistence.ParticipantService;
 
+import javax.transaction.Transactional;
+
 @RestController
 @RequestMapping("/participants")
 public class ParticipantRestController {
@@ -18,6 +20,7 @@ public class ParticipantRestController {
 	@Autowired
 	ParticipantService participantService;
 
+	@Transactional
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ResponseEntity<?> getParticipants(
 			@RequestParam(required = false) String sortBy,
@@ -28,6 +31,7 @@ public class ParticipantRestController {
 	}
 
 
+	@Transactional
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getParticipant(@PathVariable("id") String login) {
 		Participant participant = participantService.findByLogin(login);
@@ -37,6 +41,7 @@ public class ParticipantRestController {
 		return new ResponseEntity<Participant>(participant, HttpStatus.OK);
 	}
 
+	@Transactional
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<?> addParticipant(@RequestBody Participant participant) {
 		if (participantService.findByLogin(participant.getLogin()) != null) {
@@ -48,6 +53,7 @@ public class ParticipantRestController {
 		return new ResponseEntity<Participant>(participant, HttpStatus.CREATED);
 	}
 
+	@Transactional
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> delete(@PathVariable("id") String login) {
 		Participant participant = participantService.findByLogin(login);
@@ -58,6 +64,7 @@ public class ParticipantRestController {
 		return new ResponseEntity<Participant>(HttpStatus.OK);
 	}
 
+	@Transactional
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> update(@PathVariable("id") String login, @RequestBody Participant updatedParticipant) {
 		Participant participant = participantService.findByLogin(login);

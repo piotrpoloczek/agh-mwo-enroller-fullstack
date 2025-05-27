@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ public class MeetingParticipantRestController {
     private MeetingParticipantService meetingParticipantService;
 
     // GET meetings/{id}/participants
+    @Transactional
     @GetMapping
     public ResponseEntity<?> getParticipants(@PathVariable("meetingId") long meetingId) {
         try {
@@ -28,6 +30,7 @@ public class MeetingParticipantRestController {
     }
 
     // POST meetings/{id}/participants
+    @Transactional
     @PostMapping
     public ResponseEntity<?> addParticipant(@PathVariable("meetingId") long meetingId,
                                             @RequestBody Map<String, String> body) {
@@ -44,6 +47,7 @@ public class MeetingParticipantRestController {
     }
 
     // DELETE meetings/{id}/participants/{login}
+    @Transactional
     @DeleteMapping("/{login}")
     public ResponseEntity<?> removeParticipant(@PathVariable("meetingId") long meetingId,
                                                @PathVariable("login") String participantLogin) {

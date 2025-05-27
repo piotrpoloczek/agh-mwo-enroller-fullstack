@@ -1,22 +1,18 @@
 ### Get all participants
 GET http://localhost:8080/participants
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL215ZW5yb2xsZXJkZW1vIiwic3ViIjoiamFuZWsiLCJpYXQiOjE3NDgxOTYwOTUsImV4cCI6MTc0ODE5OTY5NSwicm9sZSI6InBhcnRpY2lwYW50In0.Fq6H_OifZamaMY9crDt-_8xtvZ9iKNRQWLW1bpHIwSg
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL215ZW5yb2xsZXJkZW1vIiwic3ViIjoiamFuZWsiLCJpYXQiOjE3NDgyOTEyNzQsImV4cCI6MTc0ODI5NDg3NCwicm9sZSI6InBhcnRpY2lwYW50In0.Bo8wIrY2H9IlBfwQsZhIs1I5KrENIXgc1z1-5zyvjl0
 
 ### Get all participants sorted by login descending
 GET http://localhost:8080/participants?sortBy=login&sortOrder=DESC
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL215ZW5yb2xsZXJkZW1vIiwic3ViIjoiamFuZWsiLCJpYXQiOjE3NDgxOTYwOTUsImV4cCI6MTc0ODE5OTY5NSwicm9sZSI6InBhcnRpY2lwYW50In0.Fq6H_OifZamaMY9crDt-_8xtvZ9iKNRQWLW1bpHIwSg
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL215ZW5yb2xsZXJkZW1vIiwic3ViIjoiamFuZWsiLCJpYXQiOjE3NDgyOTEyNzQsImV4cCI6MTc0ODI5NDg3NCwicm9sZSI6InBhcnRpY2lwYW50In0.Bo8wIrY2H9IlBfwQsZhIs1I5KrENIXgc1z1-5zyvjl0
 
 ### Try wrong sortOrder (expect error)
 GET http://localhost:8080/participants?sortBy=login&sortOrder=DESCSSS
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL215ZW5yb2xsZXJkZW1vIiwic3ViIjoiamFuZWsiLCJpYXQiOjE3NDgxOTYwOTUsImV4cCI6MTc0ODE5OTY5NSwicm9sZSI6InBhcnRpY2lwYW50In0.Fq6H_OifZamaMY9crDt-_8xtvZ9iKNRQWLW1bpHIwSg
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL215ZW5yb2xsZXJkZW1vIiwic3ViIjoiamFuZWsiLCJpYXQiOjE3NDgyOTEyNzQsImV4cCI6MTc0ODI5NDg3NCwicm9sZSI6InBhcnRpY2lwYW50In0.Bo8wIrY2H9IlBfwQsZhIs1I5KrENIXgc1z1-5zyvjl0
 
 ### Get participants filtered by key
 GET http://localhost:8080/participants?key=piotr
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL215ZW5yb2xsZXJkZW1vIiwic3ViIjoiamFuZWsiLCJpYXQiOjE3NDgxOTYwOTUsImV4cCI6MTc0ODE5OTY5NSwicm9sZSI6InBhcnRpY2lwYW50In0.Fq6H_OifZamaMY9crDt-_8xtvZ9iKNRQWLW1bpHIwSg
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL215ZW5yb2xsZXJkZW1vIiwic3ViIjoiamFuZWsiLCJpYXQiOjE3NDgyOTEyNzQsImV4cCI6MTc0ODI5NDg3NCwicm9sZSI6InBhcnRpY2lwYW50In0.Bo8wIrY2H9IlBfwQsZhIs1I5KrENIXgc1z1-5zyvjl0
 
 ### Get participants filtered only by login key
 GET http://localhost:8080/participants?key=login
@@ -36,6 +32,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL
 ### Create a new meeting
 POST http://localhost:8080/meetings
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL215ZW5yb2xsZXJkZW1vIiwic3ViIjoiamFuZWsiLCJpYXQiOjE3NDgyOTEyNzQsImV4cCI6MTc0ODI5NDg3NCwicm9sZSI6InBhcnRpY2lwYW50In0.Bo8wIrY2H9IlBfwQsZhIs1I5KrENIXgc1z1-5zyvjl0
+
 
 {
   "title": "New Meeting Title",
@@ -52,6 +50,8 @@ Content-Type: application/json
   "description": "Updated Description",
   "date": "2025-05-01"
 }
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL215ZW5yb2xsZXJkZW1vIiwic3ViIjoiamFuZWsiLCJpYXQiOjE3NDgyOTEyNzQsImV4cCI6MTc0ODI5NDg3NCwicm9sZSI6InBhcnRpY2lwYW50In0.Bo8wIrY2H9IlBfwQsZhIs1I5KrENIXgc1z1-5zyvjl0
+
 
 ### Delete meeting by id (example id 1)
 DELETE http://localhost:8080/meetings/1
