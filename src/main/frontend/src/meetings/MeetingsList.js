@@ -1,4 +1,6 @@
+// src/meetings/MeetingsList.js
 export default function MeetingsList({ meetings, username, onDelete, onJoin, onLeave }) {
+    console.log("Rendering meetings list:", meetings);
     return (
         <table>
             <thead>

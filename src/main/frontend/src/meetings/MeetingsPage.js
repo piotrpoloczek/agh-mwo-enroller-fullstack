@@ -1,37 +1,30 @@
+// src/meetings/MeetingsPage.js
 import { useEffect, useState } from "react";
 import NewMeetingForm from "./NewMeetingForm";
 import MeetingsList from "./MeetingsList";
 
-export default function MeetingsPage({ username }) {
+export default function MeetingsPage({ username, token }) {
     const [meetings, setMeetings] = useState([]);
     const [addingNewMeeting, setAddingNewMeeting] = useState(false);
-    const token = localStorage.getItem('jwt');
 
     useEffect(() => {
         fetchMeetings();
     }, [token]);
 
     async function fetchMeetings() {
+        console.log("Fetching meetings");
         try {
             const response = await fetch(`/meetings`, {
-                headers: {
-                    'Authorization': 'Bearer ' + token
-                }
+                headers: { 'Authorization': 'Bearer ' + token }
             });
-
-            if (!response.ok) {
-                throw new Error("Failed to fetch meetings");
-            }
-
+            if (!response.ok) throw new Error("Failed to fetch meetings");
             const rawMeetings = await response.json();
+            console.log("Meetings fetched:", rawMeetings);
 
-            // Fetch participants for each meeting
             const meetingsWithParticipants = await Promise.all(
                 rawMeetings.map(async (meeting) => {
                     const resp = await fetch(`/meetings/${meeting.id}/participants`, {
-                        headers: {
-                            'Authorization': 'Bearer ' + token
-                        }
+                        headers: { 'Authorization': 'Bearer ' + token }
                     });
                     const participants = resp.ok ? await resp.json() : [];
                     return { ...meeting, participants };
@@ -45,6 +38,7 @@ export default function MeetingsPage({ username }) {
     }
 
     async function handleNewMeeting(meeting) {
+        console.log("Creating new meeting:", meeting);
         const response = await fetch('/meetings', {
             method: 'POST',
             body: JSON.stringify(meeting),
@@ -53,7 +47,6 @@ export default function MeetingsPage({ username }) {
                 'Authorization': 'Bearer ' + token
             }
         });
-
         if (response.ok) {
             await fetchMeetings();
             setAddingNewMeeting(false);
@@ -64,22 +57,17 @@ export default function MeetingsPage({ username }) {
     }
 
     async function handleDeleteMeeting(meeting) {
+        console.log("Deleting meeting:", meeting);
         const response = await fetch(`/meetings/${meeting.id}`, {
             method: 'DELETE',
-            headers: {
-                'Authorization': 'Bearer ' + token
-            }
+            headers: { 'Authorization': 'Bearer ' + token }
         });
-
-        if (response.ok) {
-            await fetchMeetings();
-        } else {
-            const error = await response.text();
-            console.error('Failed to delete meeting:', error);
-        }
+        if (response.ok) await fetchMeetings();
+        else console.error('Failed to delete meeting:', await response.text());
     }
 
     async function handleJoinMeeting(meeting) {
+        console.log("Joining meeting:", meeting);
         const response = await fetch(`/meetings/${meeting.id}/participants`, {
             method: 'POST',
             headers: {
@@ -88,29 +76,18 @@ export default function MeetingsPage({ username }) {
             },
             body: JSON.stringify({ login: username })
         });
-
-        if (response.ok) {
-            await fetchMeetings();
-        } else {
-            const error = await response.text();
-            console.error('Failed to join meeting:', error);
-        }
+        if (response.ok) await fetchMeetings();
+        else console.error('Failed to join meeting:', await response.text());
     }
 
     async function handleLeaveMeeting(meeting) {
+        console.log("Leaving meeting:", meeting);
         const response = await fetch(`/meetings/${meeting.id}/participants/${username}`, {
             method: 'DELETE',
-            headers: {
-                'Authorization': 'Bearer ' + token
-            }
+            headers: { 'Authorization': 'Bearer ' + token }
         });
-
-        if (response.ok) {
-            await fetchMeetings();
-        } else {
-            const error = await response.text();
-            console.error('Failed to leave meeting:', error);
-        }
+        if (response.ok) await fetchMeetings();
+        else console.error('Failed to leave meeting:', await response.text());
     }
 
     return (
