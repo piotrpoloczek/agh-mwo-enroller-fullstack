@@ -42,6 +42,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
+                // allow frontend and static files
+                .antMatchers("/", "/index.html", "/static/**", "/favicon.ico", "/manifest.json", "/logo*.png").permitAll()
+                // allow API endpoints for registration and login
                 .antMatchers(HttpMethod.POST, "/participants").permitAll()
                 .antMatchers("/tokens").permitAll()
                 .anyRequest().authenticated()
@@ -56,6 +59,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                         new JWTAuthorizationFilter(authenticationManager(), secret)
                 );
     }
+
 
 
     // Musisz jawnie zdefiniować AuthenticationManager jako bean
